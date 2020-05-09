@@ -94,7 +94,7 @@ function connect()
 				};
 			var time= new Date(msg.date);
 			var timeStr = time.toLocaleTimeString();
-			p.innerHTML += '<div class="sent"><b>You ('+timeStr+') : </b>' + ms + '</div><br>';	
+			p.innerHTML += '<div class="sent"><b>You ('+timeStr+') : </b><br>' + ms + '</div><br>';	
 			socket.send(JSON.stringify(msg));
 			mf.value="";
 			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
@@ -143,7 +143,7 @@ function connect()
 		}
 		else if(msg.type=="message")
 		{
-  			p.innerHTML += '<div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b>' + msg.text + '</div><br>';
+  			p.innerHTML += '<div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + msg.text + '</div><br>';
 		}
 		document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 	};
