@@ -94,7 +94,7 @@ function connect()
 				};
 			var time= new Date(msg.date);
 			var timeStr = time.toLocaleTimeString();
-			p.innerHTML += '<div class="sent"><b>You</b> ('+timeStr+') : ' + ms + '</div><br>';	
+			p.innerHTML += '<div class="sent"><b>You ('+timeStr+') : </b>' + ms + '</div><br>';	
 			socket.send(JSON.stringify(msg));
 			mf.value="";
 			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
@@ -131,11 +131,19 @@ function connect()
 		}
 		else if(msg.type=="reconn")
 		{
-			p.innerHTML += '<b><div class="brdcst">(' + timeStr + ') '+msg.text + ' reconnected on this channel.</div></b><br>';	
+			p.innerHTML += '<b><div class="brdcst">(' + timeStr + ') '+msg.text + ' reconnected on this channel.</div></b><br>';
+			var msg1={
+				type:"users",
+				text:u_name,
+				id:msg.id,
+				date:Date.now(),
+				name:u_name
+				};
+			socket.send(JSON.stringify(msg1));	
 		}
 		else if(msg.type=="message")
 		{
-  			p.innerHTML += '<div class="mesg"><b>'+msg.name+ '</b> (' + timeStr + ') : ' + msg.text + '</div><br>';
+  			p.innerHTML += '<div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b>' + msg.text + '</div><br>';
 		}
 		document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 	};
@@ -147,6 +155,7 @@ function connect()
 			date:Date.now(),
 			name:u_name
 			};
+		flag=0;
 		socket.send(JSON.stringify(msg));
 		localStorage.removeItem('name_c');
 		localStorage.removeItem('port');
@@ -174,7 +183,12 @@ function connect()
 	socket.onclose = function(event) {
 		p.innerHTML += '<b><div class="brdcst">You are disconnected from channel '+port + '</div></b><br>';
 		document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
+		document.getElementById("connectbtn").disabled=false;   
+		document.getElementById("cancel").disabled=true;   
  		console.log('Disconnected from WebSocket.');
 	};
 }
 
+function do_nothing()
+{
+}

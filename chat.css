@@ -15,6 +15,7 @@ width:90%;
 height:350px;
 margin:auto;
 overflow:auto;
+background-color:#fed8b1;
 }
 
 #connect {
@@ -37,14 +38,24 @@ font-size:15px;
 
 .mesg {
  text-align:left;
- margin-left:20px;
  padding-left:10px;
+ padding-right:10px;
+ padding-top:1px;
+ padding-bottom:1px;
+ background-color: #ADD8E6;
+ color:black;
+ overflow:hidden;
 }
 
 .sent {
  text-align:right;
- margin-right:20px;
  padding-right:10px;
+ padding-left:10px;
+ padding-top:1px;
+ padding-bottom:1px;
+ background-color:#90ee90;
+ color:black;
+ overflow:hidden;
 }
 
 .brdcst {
