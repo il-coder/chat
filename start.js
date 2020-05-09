@@ -78,6 +78,7 @@ function connect()
 	};
 
 	document.getElementById("send").onclick=function(){
+		var mf= document.getElementById("mf");
 		var ms = mf.value;
 		if(ms=="")
 		{
