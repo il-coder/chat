@@ -1,0 +1,47 @@
+<!---
+	//OWNER	   : IG SOLUTIONS
+	//AUTHOR   : PIYUSH GARG
+	//START	   : MAY-2020
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<!---
+	//OWNER	   : IG SOLUTIONS
+	//AUTHOR   : PIYUSH GARG
+	//START	   : MAY-2020
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHAT-APP</title>
+<link rel="stylesheet" href="chat.css">
+<link rel="icon" href="ico.ico">
+</head>
+<body>
+<h1 id="title">CHAT-APPLICATION</h1><br>
+<p id="demo"></p>
+<div id="connect">
+<form action="javascript:do_nothing();">
+Enter your name :
+<input type="text" id="name" maxlength="15" placeholder="Your Name goes here" required autofocus><br>
+Enter channel Number (between 100 & 10000):
+<input type="number" id="port" placeholder="9999" min="100" max="9999" required>
+<input type="button" value="Connect" id="connectbtn" onclick="javascript:connect();"><button type="button" id="cancel" disabled>Disconnect</button><br>
+<input type="text" placeholder="Type your message here" id="mf" disabled> 
+<input type="submit" id="send" disabled value="SEND MESSAGE"><br>
+<script src="start.js"></script>
+</form>
+<!---
+//OWNER	   : IG SOLUTIONS
+//AUTHOR   : PIYUSH GARG
+//START	   : MAY-2020
+-->
+</div>
+<p><b>Note:- </b><br>Do not refresh the page once connected. It will disconnect you. However you can reconnect to same channel. But chat history will be lost.<br>Do not enter any personal/sensitive information here because the websocket is hosted at 3rd party socket server API.<br>No Chat history is saved. You can just copy-paste the chat or save the screenshot.</p>
+<footer><p style="text-align:center;">Created and Managed by IG Solutions<br>Powered By WEBSOCKETS.IN<br>All rights reserved.</p>
+</body>
+</html>
+<!---
+//OWNER	   : IG SOLUTIONS
+//AUTHOR   : PIYUSH GARG
+//START	   : MAY-2020
+-->
