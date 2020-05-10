@@ -1,11 +1,22 @@
+/*
+	//OWNER	   : IG SOLUTIONS
+	//AUTHOR   : PIYUSH GARG
+	//START	   : MAY-2020
+*/
+
 *{
 box-sizing:border-box;
+}
+
+body {
+ margin:0px;
 }
 
 #title {
 text-align:center;
 color:red;
 background-color:yellow;
+margin:0px;
 }
 
 #demo {
@@ -36,6 +47,12 @@ font-size:15px;
 font-size:15px;
 }
 
+/*
+//OWNER	   : IG SOLUTIONS
+//AUTHOR   : PIYUSH GARG
+//START	   : MAY-2020
+*/
+
 .mesg {
  text-align:left;
  max-width:45%;
@@ -47,6 +64,16 @@ font-size:15px;
  background-color: #ADD8E6;
  color:black;
  overflow:hidden;
+ float:left;
+}
+
+.mesg-tr {
+ width: 0;
+ height: 0;
+ margin-left:auto;
+ border-left: 14px solid transparent;
+ border-top: 7px solid #90ee90;
+ float:left;
 }
 
 .sent {
@@ -58,13 +85,34 @@ font-size:15px;
  padding-top:1px;
  padding-bottom:1px;
  margin-left:auto;
- margin-right:5px;
+ margin-right:0px;
  background-color:#90ee90;
  color:black;
  overflow:hidden;
+ float:right;
+}
+
+.sent-tr {
+ width: 0;
+ height: 0;
+ margin-left:auto;
+ border-right: 14px solid transparent;
+ border-top: 7px solid #90ee90;
+ float:right;
 }
 
 .brdcst {
  text-align:center;
 }
 
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*
+//OWNER	   : IG SOLUTIONS
+//AUTHOR   : PIYUSH GARG
+//START	   : MAY-2020
+*/

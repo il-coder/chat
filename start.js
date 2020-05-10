@@ -1,3 +1,9 @@
+/*
+	//OWNER	   : IG SOLUTIONS
+	//AUTHOR   : PIYUSH GARG
+	//START	   : MAY-2020
+*/
+
 var p = document.getElementById("demo");
 var socket;
 var u_name;
@@ -94,7 +100,7 @@ function connect()
 				};
 			var time= new Date(msg.date);
 			var timeStr = time.toLocaleTimeString();
-			p.innerHTML += '<div class="sent"><b>You ('+timeStr+') : </b><br>' + ms + '</div><br>';	
+			p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent"><b>You ('+timeStr+') : </b><br>' + ms + '</div></div><br>';	
 			socket.send(JSON.stringify(msg));
 			mf.value="";
 			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
@@ -143,10 +149,16 @@ function connect()
 		}
 		else if(msg.type=="message")
 		{
-  			p.innerHTML += '<div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + msg.text + '</div><br>';
+  			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + msg.text + '</div></div><br>';
 		}
 		document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 	};
+
+	/*
+	//OWNER	   : IG SOLUTIONS
+	//AUTHOR   : PIYUSH GARG
+	//START	   : MAY-2020
+	*/
 
 	document.getElementById("cancel").onclick=function() {
 		var msg={
@@ -192,3 +204,9 @@ function connect()
 function do_nothing()
 {
 }
+
+/*
+//OWNER	   : IG SOLUTIONS
+//AUTHOR   : PIYUSH GARG
+//START	   : MAY-2020
+*/
