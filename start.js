@@ -20,6 +20,7 @@ window.onload=function(){
 		document.getElementById("connectbtn").disabled=true;
 		document.getElementById("port").disabled=true;
 		document.getElementById("name").disabled=true;
+		document.getElementById("contd").disabled=false;
 		document.getElementById("port").value=port_s;
 		document.getElementById("name").value=name_s;
 		c_id=id_s;
@@ -46,6 +47,7 @@ function connect()
 	document.getElementById("connectbtn").disabled=true;
 	document.getElementById("port").disabled=true;
 	document.getElementById("name").disabled=true;
+	document.getElementById("contd").disabled=false;
 
 	socket.onopen = function(event) {
 		if(flag==0)
@@ -64,6 +66,7 @@ function connect()
 				id:c_id
 				};
 			socket.send(JSON.stringify(msg));
+			proc_contd();	
 		}
 		else if(flag==1)
 		{
@@ -205,6 +208,41 @@ function do_nothing()
 {
 }
 
+function proc_contd()
+{
+	
+	var port_s=localStorage.getItem('port');
+	if(port_s!=null)
+	{
+		document.getElementById("chat").style.display="block";
+		document.getElementById("channelselector").style.display="none";
+	}
+}
+
+
+function connectstd(n)
+{
+	document.getElementById("cancel").click();
+	setTimeout(function(){ 
+	document.getElementById("port").value=n;
+	u_name=document.getElementById("name").value;
+	if(u_name==0)
+	{
+		alert("No name entered.");
+	}
+	else
+	{
+		flag=0;
+		connect();
+	}
+	},300);
+}
+
+function go_back()
+{
+	document.getElementById("chat").style.display="none";
+	document.getElementById("channelselector").style.display="table";
+}
 /*
 //OWNER	   : IG SOLUTIONS
 //AUTHOR   : PIYUSH GARG

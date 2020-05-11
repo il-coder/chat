@@ -18,16 +18,41 @@
 </head>
 <body>
 <h1 id="title">CHAT-APPLICATION</h1><br>
+<table id="channelselector">
+<tr>
+<th colspan="3">Select a channel below OR Enter a custom channel : </th>
+</tr>
+<tr>
+<td colspan="3"><form id="con" action="javascript:connect();">Enter your name :
+<input type="text" id="name" maxlength="15" placeholder="Your Name goes here" required autofocus></form>
+</td>
+</tr>
+<tr>
+<td><input type="button" id="stdchnl" onclick="javascript:connectstd(1);" value="Connect to channel 1"></input></td>
+<td><input type="button" id="stdchnl" onclick="javascript:connectstd(2);" value="Connect to channel 2"></input></td>
+<td><input type="button" id="stdchnl" onclick="javascript:connectstd(3);" value="Connect to channel 3"></input></td>
+</tr>
+<tr>
+<td colspan="2">Enter channel Number (between 100 & 10000):
+<input type="number" id="port" placeholder="9999" min="100" max="9999" form="con" required></td></form>
+<td>
+<input type="submit" value="Connect" id="connectbtn" form="con">&nbsp;<button type="button" id="cancel" disabled>Disconnect</button></td>
+</tr>
+<tr>
+<td colspan="3"><input type="button" id="contd" onclick="javascript:proc_contd();" value="Continue to chat area" disabled></td>
+</tr>
+</table>
+<div id="chat">
+<input type="button" id="goback" onclick="javascript:go_back();" value="<<"></input>
 <p id="demo"></p>
 <div id="connect">
 <form action="javascript:do_nothing();">
-Enter your name :
-<input type="text" id="name" maxlength="15" placeholder="Your Name goes here" required autofocus><br>
-Enter channel Number (between 100 & 10000):
-<input type="number" id="port" placeholder="9999" min="100" max="9999" required>
-<input type="button" value="Connect" id="connectbtn" onclick="javascript:connect();"><button type="button" id="cancel" disabled>Disconnect</button><br>
-<input type="text" placeholder="Type your message here" id="mf" disabled> 
-<input type="submit" id="send" disabled value="SEND MESSAGE"><br>
+<div id="clearfix1">
+<button type="button" id="emoji">&#128578;</button>
+<input type="text" placeholder="Type your message here" id="mf" disabled>
+<input type="submit" id="send" value=">"></input>
+<br>
+</div>
 <script src="start.js"></script>
 </form>
 <!---
@@ -38,6 +63,7 @@ Enter channel Number (between 100 & 10000):
 </div>
 <p><b>Note:- </b><br>Do not refresh the page once connected. It will disconnect you. However you can reconnect to same channel. But chat history will be lost.<br>Do not enter any personal/sensitive information here because the websocket is hosted at 3rd party socket server API.<br>No Chat history is saved. You can just copy-paste the chat or save the screenshot.</p>
 <footer><p style="text-align:center;">Created and Managed by IG Solutions<br>Powered By WEBSOCKETS.IN<br>All rights reserved.</p>
+</div>
 </body>
 </html>
 <!---
