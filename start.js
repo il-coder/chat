@@ -243,6 +243,26 @@ function go_back()
 	document.getElementById("chat").style.display="none";
 	document.getElementById("channelselector").style.display="table";
 }
+function insemoj(tem)
+{
+	var val1 = document.getElementById("mf").value;
+	val1 = val1 + tem.text;
+	document.getElementById("mf").value = val1;	
+	document.getElementById("emojlist").style.display="block";
+}
+
+
+function emojl()
+{
+	document.getElementById("emojlist").style.display="block";
+	window.onclick = function(event){
+ 		if (document.getElementById('emojlist').contains(event.target) || document.getElementById('emoji').contains(event.target)){
+  		} else{
+			document.getElementById("emojlist").style.display="none";
+  		}		
+	};
+}
+
 /*
 //OWNER	   : IG SOLUTIONS
 //AUTHOR   : PIYUSH GARG
