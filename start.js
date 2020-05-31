@@ -27,6 +27,11 @@ window.onload=function(){
 		flag=1;
 		connect();
 	}
+
+	
+	var d = new Date();
+	var n = d.toDateString();
+	p.innerHTML += '<div class="date">'+n+'</div><br>';
 }
 
 function randomStr(len, arr) { 
@@ -182,6 +187,7 @@ function connect()
 		document.getElementById("connectbtn").disabled=false;   
 		document.getElementById("name").disabled=false;   
 		document.getElementById("port").disabled=false;   
+		//document.getElementById("contd").disabled=true;   
 	}
 
 	window.onbeforeunload = function () {
@@ -210,9 +216,8 @@ function do_nothing()
 
 function proc_contd()
 {
-	
-	var port_s=localStorage.getItem('port');
-	if(port_s!=null)
+	//var port_s=localStorage.getItem('port');
+	//if(port_s!=null)
 	{
 		document.getElementById("chat").style.display="block";
 		document.getElementById("channelselector").style.display="none";
@@ -251,16 +256,54 @@ function insemoj(tem)
 	document.getElementById("emojlist").style.display="block";
 }
 
-
 function emojl()
 {
-	document.getElementById("emojlist").style.display="block";
+	var port_s=localStorage.getItem('port');
+	if(port_s!=null)
+	{document.getElementById("emojlist").style.display="block";
 	window.onclick = function(event){
  		if (document.getElementById('emojlist').contains(event.target) || document.getElementById('emoji').contains(event.target)){
   		} else{
 			document.getElementById("emojlist").style.display="none";
   		}		
 	};
+	}
+}
+
+function saveHistory()
+{
+  var data = btoa(encodeURIComponent(p.innerHTML));
+  var file = new File([data],"chat.igch",{type: "text/plain",});
+  var d= new Date;
+  var filename =d.toUTCString();
+  filename +=".igch";
+  	var elem = window.document.createElement('a');
+  	elem.href = window.URL.createObjectURL(file);
+  	elem.download = filename;        
+        document.body.appendChild(elem);
+        elem.click();
+	URL.revokeObjectURL(elem.href);        
+        document.body.removeChild(elem);
+}
+
+function uploadFileAccess()
+{
+	document.getElementById("loadfile").click();	
+}
+
+function loadHistory(input)
+{
+	if (input.files[0])
+	{
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			var current = p.innerHTML;
+			p.innerHTML = decodeURIComponent(atob(e.target.result));
+			p.innerHTML += current; 
+			alert("Chat History Loaded Successfully.");
+			}
+		reader.readAsText(input.files[0]);
+	}
 }
 
 /*

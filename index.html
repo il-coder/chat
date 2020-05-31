@@ -39,9 +39,14 @@
 <input type="submit" value="Connect" id="connectbtn" form="con">&nbsp;<button type="button" id="cancel" disabled>Disconnect</button></td>
 </tr>
 <tr>
-<td colspan="3"><input type="button" id="contd" onclick="javascript:proc_contd();" value="Continue to chat area" disabled></td>
+<td colspan="1"><input type="button" id="save" onclick="javascript:saveHistory();" value="Save Chat History"></td>
+<td colspan="1"><input type="button" id="contd" onclick="javascript:proc_contd();" value="Continue to chat area"></td>
+<td colspan="1"><input type="button" id="load" onclick="javascript:uploadFileAccess();" value="Load Chat History"></td>
 </tr>
+<tr><input type="file" id="loadfile" accept=".igch" onchange="javascript:loadHistory(this);" hidden></tr>
 </table>
+
+
 <div id="chat">
 <input type="button" id="goback" onclick="javascript:go_back();" value="&#8678;"></input>
 <p id="demo"></p>
@@ -147,9 +152,9 @@
 //START	   : MAY-2020
 -->
 </div>
-<p><b>Note:- </b><br>Do not refresh the page once connected. It will disconnect you. However you can reconnect to same channel. But chat history will be lost.<br>Do not enter any personal/sensitive information here because the websocket is hosted at 3rd party socket server API.<br>No Chat history is saved. You can just copy-paste the chat or save the screenshot.</p>
-<footer><p style="text-align:center;">Created and Managed by IG Solutions<br>Powered By WEBSOCKETS.IN<br>All rights reserved.</p>
 </div>
+<p style="margin-left:10px;"><b>Note:- </b><br>&rarr; Do not refresh the page once connected. It will disconnect you. However you can reconnect to same channel. But chat history will be lost.<br>&rarr; Do not enter any personal/sensitive information here because the websocket is hosted at 3rd party socket server API.<br>&rarr; No Chat history is saved automatically but you can use save and load chat history feature.<br>&rarr; All features are not supported in Internet Explorer.
+<footer><p style="text-align:center;">Created and Managed by IG Solutions<br>Powered By WEBSOCKETS.IN<br>All rights reserved.</p></footer></p>
 </body>
 </html>
 <!---
