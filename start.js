@@ -12,6 +12,13 @@ var c_id;
 var flag=0;
 
 window.onload=function(){
+	document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
+	setInterval(function(){
+		document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
+		if(!navigator.onLine)
+			{document.getElementById('overlay').style.display="block";}
+		if(navigator.onLine){document.getElementById('overlay').style.display="none";} 
+		}, 3000);
 	var port_s=localStorage.getItem('port');
 	var name_s=localStorage.getItem('name_c');
 	var id_s= localStorage.getItem('id');
@@ -27,7 +34,7 @@ window.onload=function(){
 		flag=1;
 		connect();
 	}
-
+	
 	
 	var d = new Date();
 	var n = d.toDateString();
