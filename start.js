@@ -196,7 +196,12 @@ function connect()
 		document.getElementById("connectbtn").disabled=false;   
 		document.getElementById("name").disabled=false;   
 		document.getElementById("port").disabled=false;   
-		//document.getElementById("contd").disabled=true;   
+		//document.getElementById("contd").disabled=true; 
+		var stdchnl = document.getElementsByClassName('stdchnl');
+		for(var i=0;i<3;i++)
+		{
+			stdchnl[i].disabled = false;
+		}  
 	}
 
 	window.onbeforeunload = function () {
@@ -243,6 +248,12 @@ function proc_contd()
 function connectstd(n)
 {
 	document.getElementById("cancel").click();
+	
+	var stdchnl = document.getElementsByClassName('stdchnl');
+	for(var i=0;i<3;i++)
+	{
+		stdchnl[i].disabled = true;
+	}
 	setTimeout(function(){ 
 	document.getElementById("port").value=n;
 	u_name=document.getElementById("name").value;
