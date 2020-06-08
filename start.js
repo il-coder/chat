@@ -10,15 +10,51 @@ var u_name;
 var port;
 var c_id;
 var flag=0,disst=0;
+var onlineStat=1;
+
+
+function onlineStatus(num)
+{
+  onlineStat = num;
+  if(onlineStat==0)
+	console.clear();
+}
+
+function onlineStatusgenerate()
+{
+	var elem = document.getElementById('onlinest');
+	elem.innerHTML = "<img src='https://igdownload.github.io/chat/st.png?"+Math.random()+"' onerror='javscript:onlineStatus(0);' onload='javascript:onlineStatus(1);'>";
+}
 
 window.onload=function(){
+	/*
 	document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
+	*/
+	if(navigator.OnLine)
+	{
+			onlineStatusgenerate();
+	}
+	document.getElementById('online').innerHTML = 'You are '+((navigator.onLine && onlineStat)?'Online':'Offline');
 	setInterval(function(){
-		document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
+	/*	document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
 		if(!navigator.onLine)
 			{document.getElementById('overlay').style.display="block";}
-		if(navigator.onLine){document.getElementById('overlay').style.display="none";} 
-		}, 3000);
+		if(navigator.onLine){document.getElementById('overlay').style.display="none";}
+	*/
+		if(navigator.OnLine)
+		{
+			onlineStatusgenerate();
+		}
+		document.getElementById('online').innerHTML = 'You are '+((navigator.onLine && onlineStat)?'Online':'Offline');				
+ 		if(!(navigator.onLine && onlineStat))
+		{
+			document.getElementById('overlay').style.display="block";
+		}
+		else
+		{
+			document.getElementById('overlay').style.display="none";
+		}	
+		}, 5000);
 	var port_s=localStorage.getItem('port');
 	var name_s=localStorage.getItem('name_c');
 	var id_s= localStorage.getItem('id');
