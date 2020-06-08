@@ -30,7 +30,7 @@ window.onload=function(){
 	/*
 	document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
 	*/
-	if(navigator.OnLine)
+	if(navigator.onLine)
 	{
 			onlineStatusgenerate();
 	}
@@ -41,7 +41,7 @@ window.onload=function(){
 			{document.getElementById('overlay').style.display="block";}
 		if(navigator.onLine){document.getElementById('overlay').style.display="none";}
 	*/
-		if(navigator.OnLine)
+		if(navigator.onLine)
 		{
 			onlineStatusgenerate();
 		}
