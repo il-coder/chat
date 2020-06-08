@@ -9,7 +9,7 @@ var socket;
 var u_name;
 var port;
 var c_id;
-var flag=0;
+var flag=0,disst=0;
 
 window.onload=function(){
 	document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
@@ -93,6 +93,7 @@ function connect()
 				};
 			socket.send(JSON.stringify(msg));	
 		}
+		disst=0;
    		document.getElementById("send").disabled=false;
 		document.getElementById("mf").disabled=false;
 		document.getElementById("cancel").disabled=false;
@@ -183,6 +184,7 @@ function connect()
 			name:u_name
 			};
 		flag=0;
+		disst=1;
 		socket.send(JSON.stringify(msg));
 		localStorage.removeItem('name_c');
 		localStorage.removeItem('port');
@@ -205,6 +207,7 @@ function connect()
 			name:u_name
 			};
 		socket.send(JSON.stringify(msg));
+		disst=1;
 		socket.close();
 	}
 
@@ -214,6 +217,11 @@ function connect()
 		document.getElementById("connectbtn").disabled=false;   
 		document.getElementById("cancel").disabled=true;   
  		console.log('Disconnected from WebSocket.');
+		if(disst==0)
+		{
+			flag=1;
+			connect();
+		}
 	};
 }
 
@@ -267,12 +275,21 @@ function emojl()
 {
 	var port_s=localStorage.getItem('port');
 	if(port_s!=null)
-	{document.getElementById("emojlist").style.display="block";
-	window.onclick = function(event){
+	{
+	 if(document.getElementById("emojlist").style.display=="block")	
+	 {
+		document.getElementById("emojlist").style.display="none";
+	 }
+	 else
+	 {
+	 	document.getElementById("emojlist").style.display="block";
+	 }
+	 window.onclick = function(event){
  		if (document.getElementById('emojlist').contains(event.target) || document.getElementById('emoji').contains(event.target)){
-  		} else{
+  		}
+		else {
 			document.getElementById("emojlist").style.display="none";
-  		}		
+		}
 	};
 	}
 }
