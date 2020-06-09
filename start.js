@@ -10,20 +10,20 @@ var u_name;
 var port;
 var c_id;
 var flag=0,disst=0;
-var onlineStat=1;
-
+var onlineStat=1,freq=0;
 
 function onlineStatus(num)
 {
   onlineStat = num;
-  if(onlineStat==0)
-	console.clear();
+  freq+=1;
 }
 
 function onlineStatusgenerate()
 {
+	freq=0;
+	var d= new Date();
 	var elem = document.getElementById('onlinest');
-	elem.innerHTML = "<img src='https://igdownload.github.io/chat/st.png?"+Math.random()+"' onerror='javscript:onlineStatus(0);' onload='javascript:onlineStatus(1);'>";
+	elem.innerHTML = "<img src='https://igdownload.github.io/chat/st.png?"+(d.toISOString())+"' onerror='javscript:onlineStatus(0);' onload='javascript:onlineStatus(1);'>";
 }
 
 window.onload=function(){
@@ -46,6 +46,7 @@ window.onload=function(){
 			onlineStatusgenerate();
 		}
 		document.getElementById('online').innerHTML = 'You are '+((navigator.onLine && onlineStat)?'Online':'Offline');				
+		setTimeout(function(){if(freq==0){onlineStat=0;}},4000); //to faster the process of checking internet access in case of connection timeout
  		if(!(navigator.onLine && onlineStat))
 		{
 			document.getElementById('overlay').style.display="block";
@@ -53,8 +54,9 @@ window.onload=function(){
 		else
 		{
 			document.getElementById('overlay').style.display="none";
-		}	
+		}		
 		}, 5000);
+
 	var port_s=localStorage.getItem('port');
 	var name_s=localStorage.getItem('name_c');
 	var id_s= localStorage.getItem('id');
