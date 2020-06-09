@@ -12,6 +12,7 @@ var c_id;
 var flag=0,disst=0;
 var onlineStat=1,freq=0;
 
+
 function onlineStatus(num)
 {
   onlineStat = num;
@@ -21,26 +22,34 @@ function onlineStatus(num)
 function onlineStatusgenerate()
 {
 	freq=0;
-	var d= new Date();
-	var elem = document.getElementById('onlinest');
-	elem.innerHTML = "<img src='https://igdownload.github.io/chat/st.png?"+(d.toISOString())+"' onerror='javscript:onlineStatus(0);' onload='javascript:onlineStatus(1);'>";
+	var xhr = new XMLHttpRequest();
+    var file = "https://igdownload.github.io/chat/st.png";
+    var d = new Date();
+    var randomNum = d.toISOString();
+ 
+    xhr.open('HEAD', file + "?rand=" + randomNum, true);
+    xhr.send();
+     
+    xhr.addEventListener("readystatechange", processRequest, false);
+ 
+    function processRequest(e) {
+      if (xhr.readyState == 4) {
+        if (xhr.status >= 200 && xhr.status < 304) {
+          onlineStatus(1);
+        } else {
+                    onlineStatus(0);
+        }
+      }
+    }
 }
 
 window.onload=function(){
-	/*
-	document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
-	*/
 	if(navigator.onLine)
 	{
 			onlineStatusgenerate();
 	}
 	document.getElementById('online').innerHTML = 'You are '+((navigator.onLine && onlineStat)?'Online':'Offline');
 	setInterval(function(){
-	/*	document.getElementById('online').innerHTML = 'You are '+(navigator.onLine?'Online':'Offline');
-		if(!navigator.onLine)
-			{document.getElementById('overlay').style.display="block";}
-		if(navigator.onLine){document.getElementById('overlay').style.display="none";}
-	*/
 		if(navigator.onLine)
 		{
 			onlineStatusgenerate();
