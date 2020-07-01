@@ -12,6 +12,9 @@ var c_id;
 var flag=0,disst=0;
 var onlineStat=1,freq=0;
 
+function do_nothing()
+{
+}
 
 function onlineStatus(num)
 {
@@ -141,6 +144,7 @@ function connect()
 			socket.send(JSON.stringify(msg));	
 		}
 		disst=0;
+		document.getElementById('uimg').disabled = false;
    		document.getElementById("send").disabled=false;
 		document.getElementById("mf").disabled=false;
 		document.getElementById("cancel").disabled=false;
@@ -214,6 +218,10 @@ function connect()
 		{
   			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + msg.text + '</div></div><br>';
 		}
+		else if(msg.type=="img-msg")
+		{
+			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<img src="' +decodeURIComponent(msg.text)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image">' + '</div></div><br>';
+		}
 		document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 	};
 
@@ -242,7 +250,8 @@ function connect()
 		document.getElementById("cancel").disabled=true;
 		document.getElementById("connectbtn").disabled=false;   
 		document.getElementById("name").disabled=false;   
-		document.getElementById("port").disabled=false;   
+		document.getElementById("port").disabled=false;
+		document.getElementById('uimg').disabled = true;   
 		//document.getElementById("contd").disabled=true; 
 		var stdchnl = document.getElementsByClassName('stdchnl');
 		for(var i=0;i<3;i++)
@@ -275,10 +284,6 @@ function connect()
 			connect();
 		}
 	};
-}
-
-function do_nothing()
-{
 }
 
 function proc_contd()
@@ -350,6 +355,56 @@ function emojl()
 		}
 	};
 	}
+}
+
+function showImage(urls,IsSend)
+{
+	document.getElementById('userimage').src=urls;
+	document.getElementById('img-overlay').style.display = "block";
+	if(IsSend)
+	{
+		document.getElementById('senimg').style.display = "block";	
+	}
+	else
+	{
+		document.getElementById('senimg').style.display = "none";	
+	}
+}
+
+function cancelimg()
+{
+	document.getElementById('img-overlay').style.display = "none";
+}
+
+function sendimg()
+{
+	var url = document.getElementById('userimage').src;
+	url = encodeURIComponent(url);
+	var msg={
+				type:"img-msg",
+				text:url,
+				date:Date.now(),
+				name:u_name
+				};
+			var time= new Date(msg.date);
+			var timeStr = time.toLocaleTimeString();
+			p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent"><b>You ('+timeStr+') : </b><br><img src="' +decodeURIComponent(url)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image"></div></div><br>';	
+			socket.send(JSON.stringify(msg));
+			document.getElementById('img-overlay').style.display = "none";
+			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
+}
+
+function uploadimgs(input)
+{
+	if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+		showImage(e.target.result,true);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 function saveHistory()

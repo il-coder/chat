@@ -48,6 +48,14 @@
 </table>
 
 
+<div id = "img-overlay">
+<img src="" id="userimage" class="imgshow" alt="User Image"/>
+<div id="img-buttons">
+<input type="button" onclick="javascript:cancelimg();" value="Cancel" id="canimg">
+<input type="button" onclick="javascript:sendimg();" id="senimg" value="Send">
+</div>
+</div>
+
 <div id="chat">
 <input type="button" id="goback" onclick="javascript:go_back();" value="&#8678;"></input>
 <p id="demo"></p>
@@ -55,6 +63,8 @@
 <form action="javascript:do_nothing();">
 <div id="clearfix1">
 <button type="button" id="emoji" onclick="javascript:emojl();">&#128578;</button>
+<input type="file" id="uploadimg" accept="image/*" onchange = "javascript:uploadimgs(this);"></input>
+<button type="button" id="uimg" onclick="document.getElementById('uploadimg').click();" disabled><img src="img.png" style="width: 35px; height:35px;" alt="Insert Image"/></button>
 <input type="text" placeholder="Type your message here" id="mf" disabled>
 <input type="submit" id="send" value=">"></input><br><br><br>
 <div id="emojlist">
