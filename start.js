@@ -145,6 +145,7 @@ function connect()
 		}
 		disst=0;
 		document.getElementById('uimg').disabled = false;
+		document.getElementById('udoc').disabled = false;
    		document.getElementById("send").disabled=false;
 		document.getElementById("mf").disabled=false;
 		document.getElementById("cancel").disabled=false;
@@ -222,6 +223,10 @@ function connect()
 		{
 			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<img src="' +decodeURIComponent(msg.text)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image">' + '</div></div><br>';
 		}
+		else if(msg.type=="doc-msg")
+		{
+			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<a class="document" id="' + msg.text + '" onclick="javascript:showDocs(this.id);">File : '+ msg.docName + '</a>' + '</div></div><br>';
+		}
 		document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 	};
 
@@ -251,7 +256,8 @@ function connect()
 		document.getElementById("connectbtn").disabled=false;   
 		document.getElementById("name").disabled=false;   
 		document.getElementById("port").disabled=false;
-		document.getElementById('uimg').disabled = true;   
+		document.getElementById('uimg').disabled = true;  
+		document.getElementById('udoc').disabled = true;   
 		//document.getElementById("contd").disabled=true; 
 		var stdchnl = document.getElementsByClassName('stdchnl');
 		for(var i=0;i<3;i++)
@@ -360,6 +366,7 @@ function emojl()
 function showImage(urls,IsSend)
 {
 	document.getElementById('userimage').src=urls;
+	document.getElementById('userimage').style.display = "block";
 	document.getElementById('img-overlay').style.display = "block";
 	if(IsSend)
 	{
@@ -371,9 +378,21 @@ function showImage(urls,IsSend)
 	}
 }
 
+function showDocs(inputdata)
+{
+	var urls=decodeURIComponent(inputdata);
+	document.getElementById('userdoc').src=urls;
+	document.getElementById('userdoc').style.display = "block";
+	document.getElementById('img-overlay').style.display = "block";
+}
+
 function cancelimg()
 {
+	document.getElementById('userdoc').src="";	
 	document.getElementById('img-overlay').style.display = "none";
+	document.getElementById('userimage').style.display = "none";
+	document.getElementById('userdoc').style.display = "none";
+	document.getElementById('senimg').style.display = "none";
 }
 
 function sendimg()
@@ -390,9 +409,28 @@ function sendimg()
 			var timeStr = time.toLocaleTimeString();
 			p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent"><b>You ('+timeStr+') : </b><br><img src="' +decodeURIComponent(url)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image"></div></div><br>';	
 			socket.send(JSON.stringify(msg));
-			document.getElementById('img-overlay').style.display = "none";
+			cancelimg();
 			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 }
+
+function senddocs(url,name)
+{
+	var url = encodeURIComponent(url);
+	var msg={
+				type:"doc-msg",
+				text:url,
+				docName: name,
+				date:Date.now(),
+				name:u_name
+				};
+			var time= new Date(msg.date);
+			var timeStr = time.toLocaleTimeString();
+			p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent"><b>You ('+timeStr+') : </b><br> <a class="document" id="'+ url + '" onclick="javascript:showDocs(this.id);">File : '+name+'</a></div></div><br>';	
+			socket.send(JSON.stringify(msg));
+			cancelimg();
+			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
+}
+
 
 function uploadimgs(input)
 {
@@ -401,6 +439,25 @@ function uploadimgs(input)
 
         reader.onload = function (e) {
 		showImage(e.target.result,true);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function uploaddocs(input)
+{
+	if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+	if(input.files[0].size>2097152)
+	{
+		alert("File size Greater than 2MB can't be sent.");
+		return false;
+	}
+
+        reader.onload = function (e) {
+		senddocs(e.target.result,input.files[0].name);
         }
 
         reader.readAsDataURL(input.files[0]);

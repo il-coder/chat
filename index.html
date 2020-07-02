@@ -49,7 +49,8 @@
 
 
 <div id = "img-overlay">
-<img src="" id="userimage" class="imgshow" alt="User Image"/>
+<img src="" id="userimage" class="imgshow" alt="User Text"></img>
+<iframe src="" id="userdoc" class="imgshow"></iframe>
 <div id="img-buttons">
 <input type="button" onclick="javascript:cancelimg();" value="Cancel" id="canimg">
 <input type="button" onclick="javascript:sendimg();" id="senimg" value="Send">
@@ -64,7 +65,9 @@
 <div id="clearfix1">
 <button type="button" id="emoji" onclick="javascript:emojl();">&#128578;</button>
 <input type="file" id="uploadimg" accept="image/*" onchange = "javascript:uploadimgs(this);"></input>
+<input type="file" id="uploaddoc" accept="*/*" onchange = "javascript:uploaddocs(this);"></input>
 <button type="button" id="uimg" onclick="document.getElementById('uploadimg').click();" disabled><img src="img.png" style="width: 35px; height:35px;" alt="Insert Image"/></button>
+<button type="button" id="udoc" onclick="document.getElementById('uploaddoc').click();" disabled><img src="img2.png" style="width: 35px; height:35px;" alt="Insert Image"/></button>
 <input type="text" placeholder="Type your message here" id="mf" disabled>
 <input type="submit" id="send" value=">"></input><br><br><br>
 <div id="emojlist">

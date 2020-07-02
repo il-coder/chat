@@ -170,7 +170,7 @@ font-size:20px;
 }
 
 #mf {
- width: calc(100% - 145px);
+ width: calc(100% - 185px);
  border-radius:25px;
  border: solid brown 2px;
  margin-top:auto;
@@ -325,7 +325,7 @@ li a:hover{
   text-align:center;
 }
 
-#uimg {
+#uimg, #udoc {
   width: 35px;
   height: 35px;
   padding: 0px;
@@ -336,7 +336,7 @@ li a:hover{
   outline: none;
 }
 
-#uploadimg {
+#uploadimg, #uploaddoc {
   width:0px;
   height:0px;
   display: none;
@@ -355,6 +355,7 @@ li a:hover{
 }
 
 .imgshow {
+  display: none;
   position:absolute;
   top: 50%;
   left: 50%;
@@ -379,6 +380,7 @@ li a:hover{
 }
 
 #senimg {
+  display: none;
   margin-left: 10%;
   margin-right: 30%;
   float: left;
@@ -390,6 +392,19 @@ li a:hover{
   width: 150px;
   height: 100px;
   border: solid black 3px;
+}
+
+.document {
+  color: blue;
+  text-decoration: underline;
+}
+
+.document:hover {
+  cursor: pointer;
+}
+
+#userdoc {
+  background-color: white;
 }
 
 @media only screen and (max-width: 600px) {
