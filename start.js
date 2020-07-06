@@ -100,6 +100,15 @@ function randomStr(len, arr) {
             return ans; 
       } 
 
+
+function showTyping(input)
+{
+	var doc = document.getElementById('typing');
+	doc.innerHTML = input + ' is typing...';
+	doc.style.visibility = 'visible';
+	setTimeout(function(){doc.style.visibility = 'hidden';},3000);
+}
+
 function connect()
 {
 	port=document.getElementById("port").value;
@@ -227,6 +236,10 @@ function connect()
 		{
 			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<a class="document" id="' + msg.text + '" onclick="javascript:showDocs(this.id);">File : '+ msg.docName + '</a>' + '</div></div><br>';
 		}
+		else if(msg.type=="typing")
+		{
+			showTyping(msg.name);	
+		}
 		document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 	};
 
@@ -325,6 +338,18 @@ function connectstd(n)
 		connect();
 	}
 	},300);
+}
+
+function typing()
+{
+	u_name=document.getElementById("name").value;
+	var msg={
+			type:"typing",
+			name:u_name
+			};
+	document.getElementById('mf').onkeydown = function(){do_nothing();};
+	setTimeout(function(){document.getElementById('mf').onkeydown = function(){typing();}},3000);
+	socket.send(JSON.stringify(msg));
 }
 
 function go_back()

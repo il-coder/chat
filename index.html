@@ -58,7 +58,9 @@
 </div>
 
 <div id="chat">
-<input type="button" id="goback" onclick="javascript:go_back();" value="&#8678;"></input>
+<div style="display: inline-block; width:80px;">
+<input type="button" id="goback" onclick="javascript:go_back();" value="&#8678;"></input></div>
+<div id='typing' style="visibility:hidden; text-align:center; padding-top:12px; padding-bottom:12px; font-size: 20px; margin-right: 10px; width: calc(100% - 100px); height: 50px; display: inline-block;"></div>
 <p id="demo"></p>
 <div id="connect">
 <form action="javascript:do_nothing();">
@@ -68,7 +70,7 @@
 <input type="file" id="uploaddoc" accept="*/*" onchange = "javascript:uploaddocs(this);"></input>
 <button type="button" id="uimg" onclick="document.getElementById('uploadimg').click();" disabled><img src="img.png" style="width: 35px; height:35px;" alt="Insert Image"/></button>
 <button type="button" id="udoc" onclick="document.getElementById('uploaddoc').click();" disabled><img src="img2.png" style="width: 35px; height:35px;" alt="Insert Image"/></button>
-<input type="text" placeholder="Type your message here" id="mf" disabled>
+<input type="text" placeholder="Type your message here" id="mf" onkeydown="javascript:typing();" disabled>
 <input type="submit" id="send" value=">"></input><br><br><br>
 <div id="emojlist">
 <ul>
