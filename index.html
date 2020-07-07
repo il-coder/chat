@@ -73,6 +73,8 @@
 <input type="text" placeholder="Type your message here" id="mf" onkeydown="javascript:typing();" disabled>
 <input type="submit" id="send" value=">"></input><br><br><br>
 <div id="emojlist">
+<div style="position:sticky; top:0px; background-color: #eee;"><a style="font-size: 25px;" onclick="javascript:showmoj('face');">&#128512;</a>&nbsp;&nbsp;<a style="font-size: 25px;" onclick="javascript:showmoj('food');">&#127848;</a></div>
+<div id="facemoj">
 <ul>
 <li><a onclick="javascript:insemoj(this);">&#128512;</a></li>
 <li><a onclick="javascript:insemoj(this);">&#128513;</a></li>
@@ -158,6 +160,92 @@
 <li><a onclick="javascript:insemoj(this);">&#129488;</a></li>
 </ul>
 </div>
+<div id="foodmoj" style="display:none;">
+<ul>
+<li><a onclick="javascript:insemoj(this);">&#127813;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127814;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127815;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127816;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127817;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127818;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127819;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127820;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127821;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127822;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127823;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127824;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127825;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127826;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127827;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127828;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127829;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127830;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127831;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127832;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127833;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127834;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127835;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127836;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127837;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127838;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127839;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127840;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127841;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127842;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127843;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127844;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127845;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127846;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127847;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127848;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127849;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127850;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127851;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127852;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127853;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127854;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127855;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127856;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127857;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127858;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127859;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127860;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127861;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127862;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127863;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127864;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127865;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127866;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127867;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127868;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127869;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127870;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127871;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127872;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127873;</a></li>
+<li><a onclick="javascript:insemoj(this);">&#127874;</a></li>
+</ul>
+</div>
+</div>
+
+<script>
+function showmoj(inp)
+{
+	var facemojvar = document.getElementById('facemoj');
+	var foodmojvar = document.getElementById('foodmoj');
+	if(inp=='face')
+	{
+		foodmojvar.style.display = 'none';
+		facemojvar.style.display = 'block';
+	}
+	else if(inp=='food')
+	{
+		foodmojvar.style.display = 'block';
+		facemojvar.style.display = 'none';
+	}
+}
+</script>
+
 <br>
 </div>
 <script src="start.js"></script>

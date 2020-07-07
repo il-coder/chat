@@ -288,11 +288,14 @@ li {
  display:inline;
 }
 
-li a{
+#emojlist a{
+ display: inline-block;
+ width: 28px;
+ text-align: center;
  text-decoration:none;
 }
 
-li a:hover{
+#emojlist a:hover{
  cursor:pointer;
 }
 
