@@ -55,19 +55,20 @@ margin:0px;
 }
 
 #demo {
-left:5%;
+left:2%;
 border: solid 5px purple;
-width:90%;
-height:350px;
+width:95%;
+height: 65vh;
 margin:auto;
 overflow:auto;
 background-color:#fed8b1;
 }
 
 #clearfix1 {
-margin-top:2%;
-margin-left:5%;
-width:90%;
+margin-top:1%;
+margin-left:5px;
+margin-right:5px;
+width:97%;
 height:50px;
 overflow:hidden;
 } 

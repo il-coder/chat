@@ -312,6 +312,8 @@ function proc_contd()
 	{
 		document.getElementById("chat").style.display="block";
 		document.getElementById("channelselector").style.display="none";
+		document.getElementById("footers").style.display="none";
+		document.getElementById("footers2").style.display="none";
 	}
 }
 
@@ -356,6 +358,8 @@ function go_back()
 {
 	document.getElementById("chat").style.display="none";
 	document.getElementById("channelselector").style.display="table";
+	document.getElementById("footers").style.display="block";	
+	document.getElementById("footers2").style.display="block";	
 }
 function insemoj(tem)
 {
@@ -418,6 +422,8 @@ function cancelimg()
 	document.getElementById('userimage').style.display = "none";
 	document.getElementById('userdoc').style.display = "none";
 	document.getElementById('senimg').style.display = "none";
+	document.getElementById('uploadimg').value = '';
+	document.getElementById('uploaddoc').value = '';
 }
 
 function sendimg()
@@ -466,6 +472,10 @@ function uploadimgs(input)
 		showImage(e.target.result,true);
         }
 
+	reader.onerror = function(e) {
+		alert("An error occurred");
+	}	
+
         reader.readAsDataURL(input.files[0]);
     }
 }
@@ -484,6 +494,10 @@ function uploaddocs(input)
         reader.onload = function (e) {
 		senddocs(e.target.result,input.files[0].name);
         }
+
+	reader.onerror = function(e) {
+		alert("An error occurred");
+	}
 
         reader.readAsDataURL(input.files[0]);
     }
