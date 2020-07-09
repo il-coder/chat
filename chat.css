@@ -6,7 +6,6 @@
 
 @font-face {
   font-family: emojFont;
-  src: url(TwemojiMozilla.ttf);
   src: url(seguiemj.ttf);
 }
 
@@ -270,6 +269,8 @@ font-size:20px;
  display:none;
  width: 250px;
  height: 150px;
+ bottom: 20px;
+ left: 20px;
  word-wrap: break-word;
  overflow:auto;
  background-color: white;
