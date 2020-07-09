@@ -411,6 +411,22 @@ li {
   background-color: white;
 }
 
+#options a {
+            display: block;
+            text-decoration: none;
+            font-size: 30px;
+	    padding: 15px;
+      	}
+        #options a:hover {
+            cursor: pointer;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+#options {
+  background-color: #EEE;
+}
+
 @media only screen and (max-width: 600px) {
   #overlay {
 	height:60%;

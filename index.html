@@ -57,6 +57,11 @@
 </div>
 </div>
 
+<div id='options' style='display:none; position:absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); border: solid black 2px;'>
+	<a class='delete' href='javascript:do_nothing();' onclick='javascript:deletemsg(this.id)'>Delete</a>
+	<a href='javascript:do_nothing();' class='reply' onclick='javascript:reply(this.id)'>Reply</a>
+</div>
+
 <div id="chat">
 <div style="display: inline-block; width:80px;">
 <input type="button" id="goback" onclick="javascript:go_back();" value="&#8678;"></input></div>

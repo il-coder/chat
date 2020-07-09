@@ -6,6 +6,7 @@
 
 var p = document.getElementById("demo");
 var socket;
+var replink='';
 var u_name;
 var port;
 var c_id;
@@ -161,6 +162,11 @@ function connect()
 	};
 
 	document.getElementById("send").onclick=function(){
+		var lp = 0;
+		if(replink!='')
+		{
+			lp = 1;
+		}
 		var mf= document.getElementById("mf");
 		var ms = mf.value;
 		if(ms=="")
@@ -172,14 +178,25 @@ function connect()
 			var msg={
 				type:"message",
 				text:ms,
+				link: replink,
+				linkp: lp,
 				date:Date.now(),
 				name:u_name
 				};
+			var myid = msg.date;
 			var time= new Date(msg.date);
 			var timeStr = time.toLocaleTimeString();
-			p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent"><b>You ('+timeStr+') : </b><br>' + ms + '</div></div><br>';	
+			if(replink!='')
+			{
+				p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>You ('+timeStr+') : </b><br>'+ replink + '<br>' + ms + '</div></div><br>';	
+			}
+			else
+			{
+				p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>You ('+timeStr+') : </b><br>' + ms + '</div></div><br>';	
+			}
 			socket.send(JSON.stringify(msg));
 			mf.value="";
+			replink= '';
 			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 		}
 	};	
@@ -188,7 +205,10 @@ function connect()
 		var text = "";
  		var msg = JSON.parse(event.data);
 		var time = new Date(msg.date);
-  		var timeStr = time.toLocaleTimeString();
+		var timeStr = time.toLocaleTimeString();
+		var mylink= msg.link;
+		var wlp = msg.linkp;
+		var myid = msg.date;
 		if(msg.type=="conn")
 		{
 			p.innerHTML += '<b><div class="brdcst">(' + timeStr + ') '+msg.text + ' joined on this channel.</div></b><br>';
@@ -226,15 +246,36 @@ function connect()
 		}
 		else if(msg.type=="message")
 		{
-  			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + msg.text + '</div></div><br>';
+			if(wlp)
+			{
+				p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>'+ mylink +'<br>' + msg.text + '</div></div><br>';
+			}
+			else
+			{
+				p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + msg.text + '</div></div><br>';
+			}
 		}
 		else if(msg.type=="img-msg")
 		{
-			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<img src="' +decodeURIComponent(msg.text)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image">' + '</div></div><br>';
+			if(wlp)
+			{
+				p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>'+ replink +'<br>'+ '<img src="' +decodeURIComponent(msg.text)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image">' + '</div></div><br>';
+			}
+			else
+			{
+				p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<img src="' +decodeURIComponent(msg.text)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image">' + '</div></div><br>';
+			}
 		}
 		else if(msg.type=="doc-msg")
 		{
-			p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<a class="document" id="' + msg.text + '" onclick="javascript:showDocs(this.id);">File : '+ msg.docName + '</a>' + '</div></div><br>';
+			if(wlp)
+			{
+				p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>'+ replink +'<br>' + '<a class="document" id="' + msg.text + '" onclick="javascript:showDocs(this.id);">File : '+ msg.docName + '</a>' + '</div></div><br>';
+			}
+			else
+			{
+				p.innerHTML += '<div class="clearfix"><div class="mesg-tr"></div><div class="mesg" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>'+msg.name+ ' (' + timeStr + ') : </b><br>' + '<a class="document" id="' + msg.text + '" onclick="javascript:showDocs(this.id);">File : '+ msg.docName + '</a>' + '</div></div><br>';
+			}
 		}
 		else if(msg.type=="typing")
 		{
@@ -428,37 +469,69 @@ function cancelimg()
 
 function sendimg()
 {
+	var lp = 0;
+	if(replink!='')
+	{
+		lp = 1;
+	}
 	var url = document.getElementById('userimage').src;
 	url = encodeURIComponent(url);
 	var msg={
 				type:"img-msg",
 				text:url,
 				date:Date.now(),
+				link: replink,
+				linkp: lp,
 				name:u_name
 				};
 			var time= new Date(msg.date);
 			var timeStr = time.toLocaleTimeString();
-			p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent"><b>You ('+timeStr+') : </b><br><img src="' +decodeURIComponent(url)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image"></div></div><br>';	
+			var myid= Date.now();
+			if(replink!='')
+			{
+				p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>You ('+timeStr+') : </b><br>' + replink +'<br><img src="' +decodeURIComponent(url)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image"></div></div><br>';	
+			}
+			else
+			{
+				p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>You ('+timeStr+') : </b><br><img src="' +decodeURIComponent(url)+'" onclick = "javascript:showImage(this.src,false);" class="chatimg" alt="User Image"></div></div><br>';	
+			}
 			socket.send(JSON.stringify(msg));
 			cancelimg();
+			replink= '';
 			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 }
 
 function senddocs(url,name)
 {
 	var url = encodeURIComponent(url);
+	var lp = 0;
+	if(replink!='')
+	{
+		lp = 1;
+	}
 	var msg={
 				type:"doc-msg",
 				text:url,
 				docName: name,
+				link: replink,
+				linkp: lp,
 				date:Date.now(),
 				name:u_name
 				};
 			var time= new Date(msg.date);
 			var timeStr = time.toLocaleTimeString();
-			p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent"><b>You ('+timeStr+') : </b><br> <a class="document" id="'+ url + '" onclick="javascript:showDocs(this.id);">File : '+name+'</a></div></div><br>';	
+			var myid= Date.now();
+			if(replink!='')
+			{
+				p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>You ('+timeStr+') : </b><br>' + replink+ '<br> <a class="document" id="'+ url + '" onclick="javascript:showDocs(this.id);">File : '+name+'</a></div></div><br>';	
+			}
+			else
+			{
+				p.innerHTML += '<div class="clearfix"><div class="sent-tr"></div><div class="sent" id="'+ myid +'" oncontextmenu="javascript:showoptions(this.id,event)"><b>You ('+timeStr+') : </b> <br> <a class="document" id="'+ url + '" onclick="javascript:showDocs(this.id);">File : '+name+'</a></div></div><br>';	
+			}
 			socket.send(JSON.stringify(msg));
 			cancelimg();
+			replink='';
 			document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
 }
 
@@ -522,6 +595,56 @@ function saveHistory()
 function uploadFileAccess()
 {
 	document.getElementById("loadfile").click();	
+}
+
+function showoptions(input)
+{
+            event.preventDefault();
+            document.getElementsByClassName('reply')[0].id= '#' + input;
+            document.getElementsByClassName('delete')[0].id= '#' + input;
+            document.getElementById('options').style.display= 'block';
+            window.onclick = function(event){
+ 		        if (document.getElementById('options').contains(event.target)) {
+  		        }
+                else {
+                    document.getElementById("options").style.display="none";
+                }
+	        };
+}
+
+function highlight(inp)
+{
+	inp = inp.split('#')[1];
+	var tobehl = document.getElementById(inp);
+	if(tobehl==null)
+	{
+		alert('Referred message not found')
+	}
+	else
+	{
+		tobehl.parentNode.classList.add('highlight');
+		setTimeout(function(){tobehl.parentNode.classList.remove('highlight');},1500)
+	}
+}
+
+function deletemsg(inp)
+{
+	var gotid = inp.split('#')[1];
+	var elem = document.getElementById(gotid);
+	elem.parentNode.parentNode.removeChild(elem.parentNode.nextSibling);
+	elem.parentNode.parentNode.removeChild(elem.parentNode);
+	document.getElementById("options").style.display="none";
+}
+
+function reply(inp)
+{
+	replink = '<a href="' + inp + '" onclick="javsacript:highlight(this.href);">Replied To</a>';
+	var t = document.getElementById('mf').value;
+	document.getElementById('mf').value = 'REPLIED MESSAGE : ';
+	document.getElementById('mf').value += t;
+	document.getElementById("options").style.display="none";
+	document.getElementById("demo").scrollTop = document.getElementById("demo").scrollHeight;
+	document.getElementById('mf').focus();
 }
 
 function loadHistory(input)
