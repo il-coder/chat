@@ -47,10 +47,12 @@ td {
 }
 
 #title {
-text-align:center;
-color:red;
-background-color:yellow;
-margin:0px;
+ position: fixed;
+ width: 100%;
+ text-align:center;
+ color:red;
+ background-color:yellow;
+ margin: 0px;
 }
 
 #demo {
