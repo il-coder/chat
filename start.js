@@ -1,5 +1,5 @@
 /*
-	//OWNER	   : IG SOLUTIONS
+	//OWNER	   : IL CODER
 	//AUTHOR   : PIYUSH GARG
 	//START	   : MAY-2020
 */
@@ -285,7 +285,7 @@ function connect()
 	};
 
 	/*
-	//OWNER	   : IG SOLUTIONS
+	//OWNER	   : IL CODER
 	//AUTHOR   : PIYUSH GARG
 	//START	   : MAY-2020
 	*/
@@ -663,7 +663,7 @@ function loadHistory(input)
 }
 
 /*
-//OWNER	   : IG SOLUTIONS
+//OWNER	   : IL CODER
 //AUTHOR   : PIYUSH GARG
 //START	   : MAY-2020
 */
