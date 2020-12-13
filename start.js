@@ -27,7 +27,7 @@ function onlineStatusgenerate()
 {
 	freq=0;
 	var xhr = new XMLHttpRequest();
-    var file = "https://igdownload.github.io/chat/st.png";
+    var file = "https://il-coder.github.io/chat/st.png";
     var d = new Date();
     var randomNum = d.toISOString();
  

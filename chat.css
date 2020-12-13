@@ -208,7 +208,7 @@ font-size:20px;
 
 #connectbtn:disabled {
  border:none;
- background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%)
+ background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%);
  color:white;
  text-align:center;
  opacity:0.5;
@@ -218,7 +218,7 @@ font-size:20px;
 
 #cancel:disabled {
  border:none;
- background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%)
+ background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%);
  color:white;
  text-align:center;
  opacity:0.5;
@@ -228,7 +228,7 @@ font-size:20px;
 
 #contd:disabled {
  border:none;
- background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%)
+ background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%);
  color:white;
  text-align:center;
  opacity:0.5;
@@ -238,7 +238,7 @@ font-size:20px;
 
 .stdchnl:disabled {
  border:none;
- background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%)
+ background-image: linear-gradient(to right, #16A085 0%, #F4D03F 51%, #16A085 100%);
  color:white;
  text-align:center;
  opacity:0.5;
