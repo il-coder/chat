@@ -113,7 +113,8 @@ function showTyping(input)
 function connect()
 {
 	port=document.getElementById("port").value;
-	socket = new WebSocket('wss://free3.piesocket.com/v3/'+port+'?apiKey=NxcDNyx8dSmaMAVSGc0jLCXSYXBEwxdmRBIdZUnuannYKQKhyXRIseij7wvO');
+// 	socket = new WebSocket('wss://free3.piesocket.com/v3/'+port+'?apiKey=NxcDNyx8dSmaMAVSGc0jLCXSYXBEwxdmRBIdZUnuannYKQKhyXRIseij7wvO');
+	socket = new WebSocket('wss://demo.piesocket.com/v3/'+port+'?apiKey=oCdCMcMPQpbvNjUIzqtvF1d2X2okWpDQj4AwARJuAgtjhzKxVEjQU6IdCjwm');
 
 	u_name=document.getElementById("name").value;
 	document.getElementById("connectbtn").disabled=true;
